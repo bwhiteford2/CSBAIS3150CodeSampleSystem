@@ -10,4 +10,32 @@ public partial class EnrollStudent : System.Web.UI.Page
     {
 
     }
+
+    protected void Submit_Click(object sender, EventArgs e)
+    {
+
+        Student AcceptedStudent = new Student();
+        AcceptedStudent.StudentId = StudentIdTextBox.Text;
+        AcceptedStudent.FirstName = FirstNameTextBox.Text;
+        AcceptedStudent.LastName = LastNameTextBox.Text;
+        AcceptedStudent.Email = EmailTextBox.Text;
+        string ProgramCode = ProgramDropDownList.SelectedValue;
+
+        bool Confirmation;
+
+        BCS RequestDirector = new BCS();
+        Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
+
+        if (Confirmation)
+        {
+            MessagesLabel.Visible = true;
+            MessagesLabel.Text = ("Add student was successful");
+        }            
+        else
+        {
+            MessagesLabel.Visible = true;
+            MessagesLabel.Text = ("Add student was not successful");
+        }
+            
+    }
 }

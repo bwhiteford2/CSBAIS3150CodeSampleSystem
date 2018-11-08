@@ -10,4 +10,16 @@ public partial class FindStudent : System.Web.UI.Page
     {
 
     }
+
+    protected void Submit_Click(object sender, EventArgs e)
+    {
+        BCS RequestDirector = new BCS();
+
+        Student enrolledStudent = RequestDirector.FindStudent(FindStudentTextBox.Text);
+
+        if (!string.IsNullOrEmpty(enrolledStudent.FirstName))
+            MessageLabel.Text = (enrolledStudent.FirstName + " " + enrolledStudent.LastName + " <br />" + enrolledStudent.Email);
+        else
+            MessageLabel.Text = ("Student not found");
+    }
 }
