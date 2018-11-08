@@ -1,0 +1,12 @@
+﻿body {
+    background-color:lightblue;
+}
+.jumbotron{
+    background-image:url(BlueLogo.png);
+    color: white;
+    background-size: cover;
+}
+.jumbotron img {
+    width: 10%;
+    height: 10%;
+}
