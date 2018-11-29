@@ -1,8 +1,9 @@
-﻿body {
-    background-color:lightcoral;
+﻿.jumbotron {
+    background-image: url(RedLogo.png);
+    background-size:70px 50px;
+    
+    background-repeat:no-repeat;
 }
-.jumbotron{
-    background-image:url(RedLogo.jpg);
-    color: white;
-    background-size: cover;
+body{
+    background-color: black;
 }

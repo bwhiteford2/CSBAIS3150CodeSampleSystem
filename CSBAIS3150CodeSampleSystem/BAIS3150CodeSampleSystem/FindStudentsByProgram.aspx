@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BootstrapMasterPage.master" AutoEventWireup="true" CodeFile="FindStudentsByProgram.aspx.cs" Inherits="FindStudentsByProgram" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BootstrapMasterPage.master" AutoEventWireup="true" CodeFile="FindStudentsByProgram.aspx.cs" Inherits="FindStudentsByProgram" Theme="RedTheme" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
