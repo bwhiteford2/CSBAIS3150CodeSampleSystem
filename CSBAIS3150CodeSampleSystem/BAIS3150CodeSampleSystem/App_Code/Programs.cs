@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient; // SqlConnection, SqlCommand, SqlParameter, SqlDataReader 
 using System.Data;
+using System.Configuration;
 
 public class Programs
 {
@@ -9,7 +10,7 @@ public class Programs
     {
         bool Success;
         // Step 1: Create an SqlConnection instance and open the database connection
-        const string dbConnectionString = @"Server=(localdb)\MSSQLLocalDB;database=BCS-db;Integrated Security=true";
+        string dbConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
         SqlConnection dbConnection = new SqlConnection();
         dbConnection.ConnectionString = dbConnectionString;
         dbConnection.Open();
@@ -61,7 +62,7 @@ public class Programs
 
         // send in the programcode, get the description
 
-        const string dbConnectionString = "Server=(localdb)\\MSSQLLocalDB;database=BCS-db;Integrated Security=true";
+        string dbConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
         SqlConnection dbConnection = new SqlConnection();
         dbConnection.ConnectionString = dbConnectionString;
         dbConnection.Open();

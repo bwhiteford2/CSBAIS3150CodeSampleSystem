@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 public class Students
 {
@@ -9,7 +10,7 @@ public class Students
         bool Success;
 
         SqlConnection dbConn = new SqlConnection();
-        dbConn.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BCS-db;Integrated Security=true";
+        dbConn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
         dbConn.Open();
 
         SqlCommand dbCmd = new SqlCommand();
@@ -47,7 +48,7 @@ public class Students
         Student EnrolledStudent = new Student();
 
         SqlConnection dbConn = new SqlConnection();
-        dbConn.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BCS-db;Integrated Security=True";
+        dbConn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
         dbConn.Open();
         SqlCommand dbCmd = new SqlCommand();
         dbCmd.Connection = dbConn;
@@ -83,7 +84,7 @@ public class Students
         bool Success = false;
 
         SqlConnection dbConn = new SqlConnection();
-        dbConn.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BCS-db;Integrated Security=True";
+        dbConn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
         dbConn.Open();
 
         SqlCommand dbCmd = new SqlCommand();
@@ -118,7 +119,7 @@ public class Students
         bool Success = false;
 
         SqlConnection dbConn = new SqlConnection();
-        dbConn.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BCS-db;Integrated Security=True";
+        dbConn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
         dbConn.Open();
 
         SqlCommand dbCmd = new SqlCommand();
@@ -150,7 +151,7 @@ public class Students
 
         DataSet studentDS = new DataSet("Student");
         SqlConnection dbConn = new SqlConnection();
-        dbConn.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BCS-db;Integrated Security=true";
+        dbConn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString; 
 
         SqlCommand dbCmd = new SqlCommand();
         dbCmd.Connection = dbConn;

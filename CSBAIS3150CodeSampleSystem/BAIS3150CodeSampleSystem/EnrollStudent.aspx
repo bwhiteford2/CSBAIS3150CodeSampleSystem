@@ -13,13 +13,10 @@
         <asp:Label ID="MessagesLabel" runat="server" class="alert alert-primary" Visible="false"></asp:Label>
         <br />
         <br />
-        <asp:DropDownList ID="ProgramDropDownList" runat="server" class="form-control">
-            <asp:ListItem Text="--> Select a Program <--" Value=""></asp:ListItem>
-            <asp:ListItem Text="Bachelor of Applied Information Systems Technology" Value="BAIST"></asp:ListItem>
-            <asp:ListItem Text="Digital Media and IT" Value="DMIT"></asp:ListItem>
-            <asp:ListItem Text="Computer Network Engineering Technology" Value="CNT"></asp:ListItem>
-        </asp:DropDownList>
 
+        <asp:Label ID="ProgramLabel" runat="server" Text="Program" ></asp:Label>
+        <asp:TextBox ID="ProgramTextBox" runat="server" CssClass="form-control"></asp:TextBox>        
+        <asp:RequiredFieldValidator ID="programTBValidator" runat="server" ErrorMessage="Program code is required" ControlToValidate="ProgramTextBox" Display="Dynamic"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="StudentIdLabel" runat="server" Text="Student ID"></asp:Label>
         <asp:TextBox ID="StudentIdTextBox" runat="server" class="form-control"></asp:TextBox>

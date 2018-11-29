@@ -13,12 +13,15 @@
 
         <asp:Label ID="FindStudentsByProgramLabel" runat="server" Text="Find Students by Program"></asp:Label>
         <asp:TextBox ID="FindStudentsByProgramTextBox" runat="server" CssClass="form-control"></asp:TextBox>
-
+        <asp:RequiredFieldValidator ID="programTBValid" runat="server" ErrorMessage="Program code is required" ControlToValidate="FindStudentsByProgramTextBox" Display="Dynamic" ></asp:RequiredFieldValidator>
         <br />
         <asp:Button ID="Submit" runat="server" Text="Submit" OnClick="Submit_Click" CssClass="btn btn-primary" />
         <br />
 
-        <asp:Table ID="StudentTable" runat="server" CssClass="table"></asp:Table>
+        <asp:Panel ID="Panel1" runat="server" Visible="false">
+            <asp:Table ID="StudentTable" runat="server" CssClass="table" ></asp:Table>
+        </asp:Panel>
+        
     </div>
 </asp:Content>
 

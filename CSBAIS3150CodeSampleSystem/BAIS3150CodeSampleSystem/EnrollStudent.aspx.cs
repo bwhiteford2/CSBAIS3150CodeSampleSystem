@@ -19,23 +19,41 @@ public partial class EnrollStudent : System.Web.UI.Page
         AcceptedStudent.FirstName = FirstNameTextBox.Text;
         AcceptedStudent.LastName = LastNameTextBox.Text;
         AcceptedStudent.Email = EmailTextBox.Text;
-        string ProgramCode = ProgramDropDownList.SelectedValue;
+        string ProgramCode = ProgramTextBox.Text;
 
         bool Confirmation;
-
-        BCS RequestDirector = new BCS();
-        Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
-
-        if (Confirmation)
+        try
         {
-            MessagesLabel.Visible = true;
-            MessagesLabel.Text = ("Add student was successful");
-        }            
-        else
-        {
-            MessagesLabel.Visible = true;
-            MessagesLabel.Text = ("Add student was not successful");
+            BCS RequestDirector = new BCS();
+            Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
+
+            if (Confirmation)
+            {
+                MessagesLabel.Visible = true;
+                MessagesLabel.ForeColor = System.Drawing.Color.Green;
+                MessagesLabel.Text = ("Add student was successful");
+
+                StudentIdTextBox.Text = "";
+                FirstNameTextBox.Text = "";
+                LastNameTextBox.Text = "";
+                EmailTextBox.Text = "";
+                ProgramTextBox.Text = "";
+            }
+            else
+            {
+                MessagesLabel.ForeColor = System.Drawing.Color.Red;
+                MessagesLabel.Visible = true;
+                MessagesLabel.Text = ("Add student was not successful");
+            }
         }
+        catch (Exception ex)
+        {
+            MessagesLabel.Visible = true;
+            //MessagesLabel.Text = ex.Message + "<br />"; this line looks ugly when the message is too long, look into this later
+            MessagesLabel.Text = ("Add student was not successful");
+            MessagesLabel.ForeColor = System.Drawing.Color.DarkRed;
+        }
+        
             
     }
 }

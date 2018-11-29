@@ -11,10 +11,15 @@
             <asp:Label ID="StudentIdLabel" runat="server" Text="StudentID to Modify"></asp:Label>
             <br />
             <asp:TextBox ID="StudentIdTextBox" runat="server" CssClass="form-control"></asp:TextBox>
-
+        <asp:RequiredFieldValidator ID="studentIDValidator" runat="server" ErrorMessage="Student Id is required" ControlToValidate="StudentIdTextBox" Display="Dynamic" ValidationGroup="Find"></asp:RequiredFieldValidator>
             <br />
-
+        <asp:Button ID="FindStudentButton" runat="server" Text="Find Student" OnClick="FindStudentButton_Click" ValidationGroup="Find" CssClass="btn btn-primary" />
+        <br />
             <asp:Panel ID="Panel1" runat="server" Visible="false">
+                <br />
+                <asp:Label ID="StudentIdLbl" runat="server" Text="Student Id: "></asp:Label>
+                <br />
+                <asp:TextBox ID="StudentIdTB" runat="server" Text="" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                 <br />
                 <asp:Label ID="FirstNameLabel" runat="server" Text="First Name"></asp:Label>
                 <br />
@@ -32,16 +37,12 @@
                 <br />
                 <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                 <br />
-
-                <asp:Label ID="ProgramCodeLabel" runat="server" Text="Program Code" ></asp:Label>
-                <br />
-                <asp:TextBox ID="ProgramCodeTextBox" runat="server" CssClass="form-control"></asp:TextBox>
-                <br />
+                <asp:Button ID="ModifyStudentButton" runat="server" Text="Modify Student" OnClick="ModifyStudentButton_Click" ValidationGroup="Modify" CssClass="btn btn-outline-primary" />
             </asp:Panel>
 
 
-            <asp:Button ID="FindStudentButton" runat="server" Text="Find Student" OnClick="FindStudentButton_Click" ValidationGroup="Find" CssClass="btn btn-primary" />
-            <asp:Button ID="ModifyStudentButton" runat="server" Text="Modify Student" OnClick="ModifyStudentButton_Click" ValidationGroup="Modify" CssClass="btn btn-outline-primary" />
+            
+            
 
     </div>
 </asp:Content>

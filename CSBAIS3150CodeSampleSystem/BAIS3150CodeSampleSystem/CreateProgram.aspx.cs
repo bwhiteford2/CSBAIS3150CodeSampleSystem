@@ -26,6 +26,8 @@ public partial class CreateProgram : System.Web.UI.Page
             {
                 MessagesLabel.Text = "Create program was successful";
                 MessagesLabel.ForeColor = System.Drawing.Color.Green;
+                ProgramCodeTextBox.Text = "";
+                DescriptionTextBox.Text = "";
             }
             else
             {
@@ -35,7 +37,8 @@ public partial class CreateProgram : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            MessagesLabel.Text = ex.Message + "<br />";
+            MessagesLabel.Text = ("Create program was not successful");
+
             MessagesLabel.ForeColor = System.Drawing.Color.DarkRed;
         }
     }

@@ -15,11 +15,34 @@ public partial class ModifyStudent : System.Web.UI.Page
     {
         BCS RequestDirector = new BCS();
 
-        Student EnrolledStudent = RequestDirector.FindStudent(StudentIdTextBox.Text);
-        FirstNameTextBox.Text = EnrolledStudent.FirstName;
-        LastNameTextBox.Text = EnrolledStudent.LastName;
-        EmailTextBox.Text = EnrolledStudent.Email;
-        Panel1.Visible = true;
+        try
+        {
+            Student enrolledStudent = RequestDirector.FindStudent(StudentIdTextBox.Text);
+
+            if (!string.IsNullOrEmpty(enrolledStudent.FirstName))
+            {
+                MessageLabel.Text = "";
+                Panel1.Visible = true;
+
+                StudentIdTB.Text = enrolledStudent.StudentId;
+                FirstNameTextBox.Text = enrolledStudent.FirstName;
+                LastNameTextBox.Text = enrolledStudent.LastName;
+                EmailTextBox.Text = enrolledStudent.Email;
+                StudentIdTextBox.Text = "";
+            }
+            else
+            {
+                Panel1.Visible = false;
+                MessageLabel.Text = ("Student not found");
+            }
+        }
+        catch (Exception)
+        {
+            Panel1.Visible = false;
+            MessageLabel.Text = ("Find student was not successful");
+
+            MessageLabel.ForeColor = System.Drawing.Color.DarkRed;
+        }
     }
 
     protected void ModifyStudentButton_Click(object sender, EventArgs e)
@@ -27,17 +50,28 @@ public partial class ModifyStudent : System.Web.UI.Page
         BCS RequestDirector = new BCS();
 
         Student EnrolledStudent = new Student();
-        EnrolledStudent.StudentId = StudentIdTextBox.Text;
+        EnrolledStudent.StudentId = StudentIdTB.Text;
         EnrolledStudent.FirstName = FirstNameTextBox.Text;
         EnrolledStudent.LastName = LastNameTextBox.Text;
         EnrolledStudent.Email = EmailTextBox.Text;
 
-        bool confirmation = RequestDirector.ModifyStudent(EnrolledStudent);
-
-        if (confirmation)
-            MessageLabel.Text = ("Changed Successfully");
-        else
-            MessageLabel.Text = ("Change unsuccessful");
+        try
+        {
+            bool confirmation = RequestDirector.ModifyStudent(EnrolledStudent);
+            if (confirmation)
+            {
+                MessageLabel.Text = ("Changed Successfully");
+                Panel1.Visible = false;
+            }                
+            else
+            {
+                MessageLabel.Text = ("Change unsuccessful");
+            }                
+        }
+        catch (Exception ex)
+        {
+            MessageLabel.Text = "Change unsuccessful";
+            
+        }             
     }
-
 }

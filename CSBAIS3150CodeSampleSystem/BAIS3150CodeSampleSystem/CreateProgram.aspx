@@ -14,7 +14,7 @@
         <asp:ValidationSummary ID="SampleValidationSummary" runat="server" DisplayMode="BulletList" ShowSummary="true" />
 
         <asp:Label ID="MessagesLabel" runat="server"></asp:Label>
-        <br />
+        <br />  
         <asp:Label ID="ProgramCodeLabel" runat="server" Text="Program Code"></asp:Label>
         <asp:TextBox ID="ProgramCodeTextBox" runat="server" class="form-control"></asp:TextBox>
         <asp:RequiredFieldValidator ID="ProgramCodeRequiredFieldValidator" runat="server" ErrorMessage="Program Code value is required" ControlToValidate="ProgramCodeTextBox" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -29,9 +29,4 @@
         <asp:Button ID="SubmitButton" runat="server" Text="Submit" class="btn btn-primary" OnClick="SubmitButton_Click" />
     </div>
 
-
-
-
-
 </asp:Content>
-
