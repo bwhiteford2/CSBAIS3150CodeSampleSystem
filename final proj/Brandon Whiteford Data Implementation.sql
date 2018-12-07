@@ -243,6 +243,89 @@ CREATE PROC uspUpdateItem
 	END
 	RETURN @STATUS
 GO
-
+CREATE PROC uspAddCustomer
+	@CustomerID INT,
+	@CustomerName NVARCHAR(50),
+	@Address NVARCHAR(30),
+	@City NVARCHAR(20),
+	@PostalCode NCHAR(6),
+	@Province NVARCHAR(25)
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @CustomerID IS NULL or @CustomerName IS NULL OR @Address IS NULL OR @City IS NULL OR @PostalCode IS NULL OR @Province IS NULL
+	BEGIN 
+		SET @Status = 1
+		RAISERROR('ERROR - CustomerID, CustomerName, Address, City, PostalCode and Province are required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		INSERT INTO Customer (CustomerID, CustomerName, Address, City, PostalCode, Province)
+		VALUES(@CustomerID, @CustomerName, @Address, @City, @PostalCode, @Province);
+		
+		IF @@ERROR <> 0 
+		BEGIN 
+			SET @Status = 1
+			RAISERROR('ERROR - Executing uspAddCustomer',16,1)
+		END
+	END
+	RETURN @STATUS
+GO
+CREATE PROC uspDeleteCustomer
+	@CustomerID INT	
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @CustomerID IS NULL
+	BEGIN 
+		SET @Status = 1
+		RAISERROR('ERROR - CustomerID is required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		DELETE FROM Customer where CustomerID = @CustomerID
+		
+		IF @@ERROR <> 0 
+		BEGIN 
+			SET @Status = 1
+			RAISERROR('ERROR - Executing uspDelete',16,1)
+		END
+	END
+	RETURN @STATUS
+GO
+CREATE PROC uspUpdateCustomer
+	@CustomerID INT,
+	@CustomerName NVARCHAR(50),
+	@Address NVARCHAR(30),
+	@City NVARCHAR(20),
+	@PostalCode NCHAR(6),
+	@Province NVARCHAR(25)
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @CustomerID IS NULL or @CustomerName IS NULL OR @Address IS NULL OR @City IS NULL OR @PostalCode IS NULL OR @Province IS NULL
+	BEGIN 
+		SET @Status = 1
+		RAISERROR('ERROR - CustomerID, CustomerName, Address, City, PostalCode and Province are required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		UPDATE Customer 
+		SET CustomerName = @CustomerName,
+			Address =  @Address,
+			City = @City,
+			PostalCode =  @PostalCode,
+			Province =  @Province
+		WHERE CustomerID = @CustomerID
+		IF @@ERROR <> 0 
+		BEGIN 
+			SET @Status = 1
+			RAISERROR('ERROR - Executing uspAddCustomer',16,1)
+		END
+	END
+	RETURN @STATUS
+GO
 exec uspGetSale 123456789
 exec uspGetSale 123456781
+
+exec uspDeleteCustomer 123
