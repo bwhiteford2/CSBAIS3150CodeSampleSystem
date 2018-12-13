@@ -15,4 +15,26 @@ public class ABCController
 
         return confirmation;
     }
+    public Item LookupItem(string itemCode)
+    {
+        Items itemsManager = new Items();
+        Item lookupItem = itemsManager.LookupItem(itemCode);
+
+        return lookupItem;
+    }
+    public bool UpdateItem(Item item)
+    {
+        Items ItemsManager = new Items();
+        bool confirmation = ItemsManager.UpdateItem(item);
+
+        return confirmation;
+    }
+
+    public bool DeleteItem(string itemCode)
+    {
+        Items ItemsManager = new Items();
+        bool confirmation = ItemsManager.DeleteItem(itemCode);
+
+        return confirmation;
+    }
 }

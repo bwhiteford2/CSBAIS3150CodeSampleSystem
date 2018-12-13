@@ -197,7 +197,7 @@ CREATE PROC uspAddItem
 	SET @Status = 0
 	IF @ItemCode IS NULL or @Description IS NULL OR @UnitPrice IS NULL
 	BEGIN 
-		SET @Status = 1
+		--SET @Status = 1
 		RAISERROR('ERROR - Item code, description, unit price are required', 16,1);
 	END 
 	ELSE 
@@ -205,13 +205,13 @@ CREATE PROC uspAddItem
 		INSERT INTO ITEM (ItemCode, Description, UnitPrice, QuantityOnHand, Active)
 		VALUES(@ItemCode, @Description,@UnitPrice,ISNULL(@QuantityOnHand,0),ISNULL(@Active,1));
 		
-		IF @@ERROR <> 0 
+		IF @@ERROR = 0 
 		BEGIN 
 			SET @Status = 1
-			RAISERROR('ERROR - Executing uspAddItem',16,1)
+			--RAISERROR('ERROR - Executing uspAddItem',16,1)
 		END
 	END
-	RETURN @STATUS
+	RETURN @Status
 GO
 CREATE PROC uspUpdateItem
 	@ItemCode NVARCHAR(7),
@@ -224,7 +224,7 @@ CREATE PROC uspUpdateItem
 	SET @Status = 0
 	IF @ItemCode IS NULL or @Description IS NULL OR @UnitPrice IS NULL
 	BEGIN 
-		SET @Status = 1
+		--SET @Status = 1
 		RAISERROR('ERROR - Item code, description, unit price are required', 16,1);
 	END 
 	ELSE 
@@ -235,10 +235,10 @@ CREATE PROC uspUpdateItem
 			QuantityOnHand = @QuantityOnHand,
 			Active = @Active
 		WHERE ItemCode = @ItemCode
-		IF @@ERROR <> 0 
+		IF @@ERROR = 0 
 		BEGIN 
 			SET @Status = 1
-			RAISERROR('ERROR - Executing uspUpdateItem',16,1)
+			--RAISERROR('ERROR - Executing uspUpdateItem',16,1)
 		END
 	END
 	RETURN @STATUS
@@ -255,7 +255,7 @@ CREATE PROC uspAddCustomer
 	SET @Status = 0
 	IF @CustomerID IS NULL or @CustomerName IS NULL OR @Address IS NULL OR @City IS NULL OR @PostalCode IS NULL OR @Province IS NULL
 	BEGIN 
-		SET @Status = 1
+		--SET @Status = 1
 		RAISERROR('ERROR - CustomerID, CustomerName, Address, City, PostalCode and Province are required', 16,1);
 	END 
 	ELSE 
@@ -266,7 +266,7 @@ CREATE PROC uspAddCustomer
 		IF @@ERROR <> 0 
 		BEGIN 
 			SET @Status = 1
-			RAISERROR('ERROR - Executing uspAddCustomer',16,1)
+			--RAISERROR('ERROR - Executing uspAddCustomer',16,1)
 		END
 	END
 	RETURN @STATUS
@@ -278,7 +278,7 @@ CREATE PROC uspDeleteCustomer
 	SET @Status = 0
 	IF @CustomerID IS NULL
 	BEGIN 
-		SET @Status = 1
+		--SET @Status = 1
 		RAISERROR('ERROR - CustomerID is required', 16,1);
 	END 
 	ELSE 
@@ -288,7 +288,7 @@ CREATE PROC uspDeleteCustomer
 		IF @@ERROR <> 0 
 		BEGIN 
 			SET @Status = 1
-			RAISERROR('ERROR - Executing uspDelete',16,1)
+			--RAISERROR('ERROR - Executing uspDelete',16,1)
 		END
 	END
 	RETURN @STATUS
@@ -305,7 +305,7 @@ CREATE PROC uspUpdateCustomer
 	SET @Status = 0
 	IF @CustomerID IS NULL or @CustomerName IS NULL OR @Address IS NULL OR @City IS NULL OR @PostalCode IS NULL OR @Province IS NULL
 	BEGIN 
-		SET @Status = 1
+		--SET @Status = 1
 		RAISERROR('ERROR - CustomerID, CustomerName, Address, City, PostalCode and Province are required', 16,1);
 	END 
 	ELSE 
@@ -317,15 +317,57 @@ CREATE PROC uspUpdateCustomer
 			PostalCode =  @PostalCode,
 			Province =  @Province
 		WHERE CustomerID = @CustomerID
-		IF @@ERROR <> 0 
+		IF @@ERROR = 0 
 		BEGIN 
 			SET @Status = 1
-			RAISERROR('ERROR - Executing uspAddCustomer',16,1)
+			--RAISERROR('ERROR - Executing uspAddCustomer',16,1)
 		END
 	END
 	RETURN @STATUS
 GO
-exec uspGetSale 123456789
-exec uspGetSale 123456781
+CREATE PROC uspDeleteItem
+	@ItemCode NVARCHAR(7)	
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @ItemCode IS NULL 
+	BEGIN 
+		SET @Status = 1
+		RAISERROR('ERROR - Item code is required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		UPDATE ITEM 
+		SET Active = 0
+		WHERE ItemCode = @ItemCode
+		IF @@ERROR = 0 
+		BEGIN 
+			SET @Status = 1
+			--RAISERROR('ERROR - Executing uspDeleteItem',16,1)
+		END
+	END
+	RETURN @STATUS
+GO
 
-exec uspDeleteCustomer 123
+CREATE PROC uspLookupItem
+	@ItemCode NVARCHAR(7)	
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @ItemCode IS NULL 
+	BEGIN 		
+		RAISERROR('ERROR - Item code is required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		SELECT Description, UnitPrice, QuantityOnHand, Active
+		FROM Item
+		WHERE ItemCode = @ItemCode
+		IF @@ERROR = 0 
+		BEGIN 
+			SET @Status = 1
+			--RAISERROR('ERROR - Executing uspLookupItem',16,1)
+		END
+	END
+	RETURN @Status
+GO
