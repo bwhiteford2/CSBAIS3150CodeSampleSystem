@@ -27,7 +27,15 @@
             <asp:TextBox ID="UnitPriceTextBox" runat="server" CssClass="form-control"></asp:TextBox>
             <asp:RequiredFieldValidator ID="ReqUnitPrice" runat="server" ErrorMessage="Unit price is required" ControlToValidate="UnitPriceTextBox" Display="Dynamic"></asp:RequiredFieldValidator>
             <asp:RangeValidator ID="UnitPriceRange" runat="server" ErrorMessage="Must be 0.01 or greater" ControlToValidate="UnitPriceTextBox" MinimumValue="0.01" Display="Dynamic" Type="double" MaximumValue="214748.3647" ></asp:RangeValidator>
+            <br />
 
+            <asp:Label ID="QoHLbl" runat="server" Text="Quantity on Hand"></asp:Label>
+            <asp:TextBox ID="QoHTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="QoHRegex" runat="server" ErrorMessage="Must be a numeric value" ControlToValidate="QoHTextBox" Display="Dynamic" ValidationExpression="^[0-9]$"></asp:RegularExpressionValidator>
+            <br />
+
+            <asp:Label ID="ActiveLbl" runat="server" Text="Active"></asp:Label>
+            <asp:CheckBox ID="ActiveCB" runat="server" CssClass="form-control" Checked="true" />
             <br />
             <asp:Button ID="Submit" runat="server" Text="Add Item" CssClass="btn btn-primary" OnClick="Submit_Click" />
         </div>

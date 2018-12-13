@@ -14,6 +14,20 @@ public partial class AddItem : System.Web.UI.Page
 
     protected void Submit_Click(object sender, EventArgs e)
     {
+        ABCController controller = new ABCController();
 
+        if (IsValid)
+        {
+            Item item = new Item(ItemCodeTextBox.Text, DescriptionTextBox.Text, decimal.Parse(UnitPriceTextBox.Text), int.Parse(QoHTextBox.Text), ActiveCB.Checked);
+            try
+            {
+                controller.AddItem(item);
+                StaticTools.MessageBox(MessageBox, "Item added successfully", true);
+            }
+            catch (Exception)
+            {
+                StaticTools.MessageBox(MessageBox, "Item add unsuccessful", false);
+            }            
+        }
     }
 }
