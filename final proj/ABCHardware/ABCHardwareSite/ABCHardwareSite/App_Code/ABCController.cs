@@ -30,6 +30,14 @@ public class ABCController
         return confirmation;
     }
 
+    public bool AddCustomer(Customer cust)
+    {
+        Customers customersManager = new Customers();
+        bool confirmation = customersManager.AddCustomer(cust);
+
+        return confirmation;
+    }
+
     public bool DeleteItem(string itemCode)
     {
         Items ItemsManager = new Items();

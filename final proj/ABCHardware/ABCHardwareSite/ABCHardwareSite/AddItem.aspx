@@ -9,7 +9,7 @@
 
     
     <div class="row form-body">
-        <div class="col-md-6">
+        <div class="col-md-6"> 
             <asp:Label ID="MessageBox" runat="server" Text=""></asp:Label>
             <br />
             <asp:Label ID="ItemCodeLbl" runat="server" Text="Item Code:"></asp:Label>
