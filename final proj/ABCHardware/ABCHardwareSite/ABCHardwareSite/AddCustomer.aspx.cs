@@ -18,20 +18,18 @@ public partial class AddCustomer : System.Web.UI.Page
         
         if(IsValid)
         {
+            FormTools ft = new FormTools();
             try
             {
                 Customer cust = new Customer(int.Parse(CustomerIDTextBox.Text), CustomerNameTextBox.Text, AddressTextBox.Text, CityTextBox.Text, PostalCodeTextBox.Text, ProvinceTextBox.Text);
-                controller.AddCustomer(cust);
-                StaticTools.MessageBox(MessageBox, "Customer add successful", true);
-                StaticTools.ClearFields(Form.Controls);
+                controller.AddCustomer(cust);                
+                ft.MessageBox(MessageBox, "Customer add successful", true);
+                ft.ClearFields(Form.Controls);
             }
             catch (Exception)
             {
-
-                StaticTools.MessageBox(MessageBox, "Customer add unsuccessful", false);
-            }
-            
+                ft.MessageBox(MessageBox, "Customer add unsuccessful", false);
+            }            
         }
-
     }
 }

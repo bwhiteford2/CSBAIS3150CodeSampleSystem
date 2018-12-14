@@ -18,19 +18,20 @@ public partial class AddItem : System.Web.UI.Page
 
         if (IsValid) 
         {
+            FormTools ft = new FormTools();
             Item item = new Item(ItemCodeTextBox.Text, DescriptionTextBox.Text, decimal.Parse(UnitPriceTextBox.Text), int.Parse(QoHTextBox.Text), ActiveCB.Checked);
            try
             {
                 controller.AddItem(item);
-                StaticTools.MessageBox(MessageBox, "Item add successful", true);
-                StaticTools.ClearFields(Form.Controls);
+                ft.ClearFields(Form.Controls);
+                ft.MessageBox(MessageBox, "Item add successful", true);                
                 // QoH is df to 0
                 QoHTextBox.Text = "0";
-                MessageBox.Text = "";
+                //MessageBox.Text = "";
             }
             catch (Exception)
             {
-                StaticTools.MessageBox(MessageBox, "Item add unsuccessful", false);
+                ft.MessageBox(MessageBox, "Item add unsuccessful", false);
             }            
         }
     }

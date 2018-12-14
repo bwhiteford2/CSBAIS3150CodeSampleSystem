@@ -24,10 +24,17 @@ public class ABCController
     }
     public bool UpdateItem(Item item)
     {
-        Items ItemsManager = new Items();
-        bool confirmation = ItemsManager.UpdateItem(item);
+        Items itemsManager = new Items();
+        bool confirmation = itemsManager.UpdateItem(item);
 
         return confirmation;
+    }
+
+    public Customer LookupCustomer(int custID)
+    {
+        Customers customersManager = new Customers();
+        Customer cust = customersManager.LookupCustomer(custID);
+        return cust;
     }
 
     public bool AddCustomer(Customer cust)
@@ -42,6 +49,22 @@ public class ABCController
     {
         Items ItemsManager = new Items();
         bool confirmation = ItemsManager.DeleteItem(itemCode);
+
+        return confirmation;
+    }
+
+    public bool UpdateCustomer(Customer cust)
+    {
+        Customers customersManager = new Customers();
+        bool confirmation = customersManager.UpdateCustomer(cust);
+
+        return confirmation;
+    }
+
+    public bool DeleteCustomer(int custID)
+    {
+        Customers customersManager = new Customers();
+        bool confirmation = customersManager.DeleteCustomer(custID);
 
         return confirmation;
     }

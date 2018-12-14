@@ -371,3 +371,26 @@ CREATE PROC uspLookupItem
 	END
 	RETURN @Status
 GO
+CREATE PROC uspLookupCustomer
+	@CustomerID INT	
+	as
+	DECLARE @Status INT
+	SET @Status = 0
+	IF @CustomerID IS NULL 
+	BEGIN 		
+		RAISERROR('ERROR - CustomerID is required', 16,1);
+	END 
+	ELSE 
+	BEGIN 
+		SELECT CustomerName, Address, City, PostalCode, Province
+		FROM Customer
+		WHERE CustomerID = @CustomerID 
+
+		IF @@ERROR = 0 
+		BEGIN 
+			SET @Status = 1
+			--RAISERROR('ERROR - Executing uspLookupItem',16,1)
+		END
+	END
+	RETURN @Status
+GO

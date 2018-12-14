@@ -18,8 +18,9 @@ public partial class ItemMaintenance : System.Web.UI.Page
     {
         ABCController controller = new ABCController();
         bool found = false;
+        FormTools ft = new FormTools();
         if (IsValid)
-        {
+        {            
             try
             {
                 Item item = controller.LookupItem(ItemCodeLookupTextBox.Text);
@@ -37,52 +38,51 @@ public partial class ItemMaintenance : System.Web.UI.Page
                 else
                 {
                     Panel1.Visible = false;
-                    StaticTools.MessageBox(MessageBox, "Item not found", false);
+                    ft.MessageBox(MessageBox, "Item not found", false);
                 }
             }
             catch (Exception)
             {
-                StaticTools.MessageBox(MessageBox, "Item lookup unsuccessful", false);
+                ft.MessageBox(MessageBox, "Item lookup unsuccessful", false);
             }
         }
         if (!found)
         {
-            //StaticTools.MessageBox(MessageBox, "Item lookup unsuccessful", false);
+            ft.MessageBox(MessageBox, "Item lookup unsuccessful", false);
         }
     }
-
     protected void Modify_Click(object sender, EventArgs e)
     {
         ABCController controller = new ABCController();
-
+        FormTools ft = new FormTools();
         Item item = new Item(ItemCodeTB.Text, DescriptionTextBox.Text, decimal.Parse(UnitPriceTextBox.Text), int.Parse(QoHTextBox.Text), ActiveCB.Checked);
         try
         {
             controller.UpdateItem(item);
-            StaticTools.MessageBox(MessageBox, "Item update successful", true);
-            StaticTools.ClearFields(Form.Controls);
+            ft.MessageBox(MessageBox, "Item update successful", true);
+            ft.ClearFields(Form.Controls);
             Panel1.Visible = false;
         }
         catch (Exception)
         {
-            StaticTools.MessageBox(MessageBox, "Item update unsuccessful", false);
+            ft.MessageBox(MessageBox, "Item update unsuccessful", false);
         }
 
     }
     protected void Delete_Click(object sender, EventArgs e)
     {
         ABCController controller = new ABCController();
-        
+        FormTools ft = new FormTools();
         try
         {
             controller.DeleteItem(ItemCodeTB.Text);
-            StaticTools.MessageBox(MessageBox, "Item delete successful", true);
-            StaticTools.ClearFields(Form.Controls);
+            ft.MessageBox(MessageBox, "Item delete successful", true);
+            ft.ClearFields(Form.Controls);
             Panel1.Visible = false;
         }
         catch (Exception)
         {
-            StaticTools.MessageBox(MessageBox, "Item delete unsuccessful", false);
+            ft.MessageBox(MessageBox, "Item delete unsuccessful", false);
         }
     }
 }

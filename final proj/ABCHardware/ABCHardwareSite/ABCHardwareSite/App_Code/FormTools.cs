@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 /// <summary>
-/// Summary description for StaticTools
+/// Summary description for FormTools
 /// </summary>
-public class StaticTools
+public class FormTools
 {
     /// <summary>
     /// Send in messagebox, the message, and the bool. Will deal with handling color 
@@ -16,7 +16,7 @@ public class StaticTools
     /// <param name="lbl"></param>
     /// <param name="msg"></param>
     /// <param name="success"></param>
-    public static void MessageBox(Label lbl, string msg, bool success)
+    public void MessageBox(Label lbl, string msg, bool success)
     {
         lbl.Text = msg;
         if (success)
@@ -28,7 +28,7 @@ public class StaticTools
             lbl.ForeColor = System.Drawing.Color.Red;
         }        
     }
-    public static void ClearFields(ControlCollection pageControls)
+    public void ClearFields(ControlCollection pageControls)
     {
         foreach (Control contl in pageControls)
         {
